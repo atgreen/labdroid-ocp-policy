@@ -5,7 +5,6 @@
 # I don't really care about capturing these events.
 { "result": "FAIL", "id": "Kubelet - Ensure Event Creation Is Configured" }
 
-
 # Baseline xfails for regression testing purposes.  They should all be investigated.
 
 { "report": "oscap-xccdf", "result": "FAIL", "id": "Ensure Eviction threshold Settings Are Set - evictionSoft: nodefs.inodesFree", "severity": "medium" }
