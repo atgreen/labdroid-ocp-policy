@@ -3,4 +3,4 @@
 # https://github.com/atgreen/red-light-green-light
 
 # I don't really care about capturing these events.
-{ "result": "FAIL, "id": "Kubelet - Ensure Event Creation Is Configured" }
+{ "result": "FAIL", "id": "Kubelet - Ensure Event Creation Is Configured" }
