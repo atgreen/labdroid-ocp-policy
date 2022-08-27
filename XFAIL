@@ -4,3 +4,21 @@
 
 # I don't really care about capturing these events.
 { "result": "FAIL", "id": "Kubelet - Ensure Event Creation Is Configured" }
+
+
+# Baseline xfails for regression testing purposes.  They should all be investigated.
+
+{ "report": "oscap-xccdf", "result": "FAIL", "id": "Ensure Eviction threshold Settings Are Set - evictionSoft: nodefs.inodesFree", "severity": "medium" }
+{ "report": "oscap-xccdf", "result": "FAIL", "id": "Ensure Eviction threshold Settings Are Set - evictionSoft: nodefs.available", "severity": "medium" }
+{ "report": "oscap-xccdf", "result": "FAIL", "id": "Ensure Eviction threshold Settings Are Set - evictionSoft: memory.available", "severity": "medium" }
+{ "report": "oscap-xccdf", "result": "FAIL", "id": "Ensure Eviction threshold Settings Are Set - evictionSoft: imagefs.inodesFree", "severity": "medium" }
+{ "report": "oscap-xccdf", "result": "FAIL", "id": "Ensure Eviction threshold Settings Are Set - evictionSoft: imagefs.available", "severity": "medium" }
+{ "report": "oscap-xccdf", "result": "FAIL", "id": "Ensure Eviction threshold Settings Are Set - evictionHard: nodefs.inodesFree", "severity": "medium" }
+{ "report": "oscap-xccdf", "result": "FAIL", "id": "Ensure Eviction threshold Settings Are Set - evictionHard: nodefs.available", "severity": "medium" }
+{ "report": "oscap-xccdf", "result": "FAIL", "id": "Ensure Eviction threshold Settings Are Set - evictionHard: memory.available", "severity": "medium" }
+{ "report": "oscap-xccdf", "result": "FAIL", "id": "Ensure Eviction threshold Settings Are Set - evictionHard: imagefs.inodesFree", "severity": "medium" }
+{ "report": "oscap-xccdf", "result": "FAIL", "id": "Ensure Eviction threshold Settings Are Set - evictionHard: imagefs.available", "severity": "medium" }
+{ "report": "oscap-xccdf", "result": "FAIL", "id": "kubelet - Set Up Sysctl to Enable Protect Kernel Defaults", "severity": "medium" }
+{ "report": "oscap-xccdf", "result": "FAIL", "id": "kubelet - Enable Protect Kernel Defaults", "severity": "medium" }
+{ "report": "oscap-xccdf", "result": "FAIL", "id": "kubelet - Allow Automatic Firewall Configuration", "severity": "medium" }
+{ "report": "oscap-xccdf", "result": "FAIL", "id": "Ensure that the Kubelet only makes use of Strong Cryptographic Ciphers", "severity": "medium" }
