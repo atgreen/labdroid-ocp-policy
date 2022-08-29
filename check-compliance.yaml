@@ -5,6 +5,9 @@
   tasks:
     - name: Check project
       shell: |
+        export KUBECONFIG={{ KUBECONFIG }}
+        export RLGL_KEY={{ RLGL_KEY }}
+        export LABDROID_COMPLIANCE_ID={{ LABDROID_COMPLIANCE_ID }}
         oc project openshift-compliance
         oc create -f - <<EOF
         apiVersion: "v1"
