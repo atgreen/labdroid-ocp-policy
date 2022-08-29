@@ -1,0 +1,39 @@
+---
+- name: Check OpenShift cluster for compliance regressions
+  hosts: all
+
+  tasks:
+    - name: Check project
+      shell: |
+        oc project openshift-compliance
+        oc create -f - <<EOF
+        apiVersion: "v1"
+        kind: Pod
+        metadata:
+          name: pv-extract
+        spec:
+          containers:
+            - name: pv-extract-pod
+              image: registry.access.redhat.com/ubi8/ubi
+              command: ["sleep", "3000"]
+              volumeMounts:
+              - mountPath: "/workers-scan-results"
+                name: workers-scan-vol
+          volumes:
+            - name: workers-scan-vol
+              persistentVolumeClaim:
+                claimName: ocp4-cis-node-worker
+        EOF
+        sleep 5
+        TDIR=$(mktemp -d)
+        oc cp pv-extract:/workers-scan-results/$(oc rsh pv-extract sh -c "ls -1rt workers-scan-results" | tail -n 1 | tr -d "\r" ) $TDIR
+        oc delete pod pv-extract
+        bzip2 -d $TDIR/*
+        wget -qO - https://rl.gl/cli/rlgl-linux-amd64.tgz | \
+            tar --strip-components=2 -xvzf - ./rlgl/rlgl;
+        ./rlgl l --key=${RLGL_KEY} https://rl.gl
+        for F in $TDIR/*; do
+          oscap xccdf generate report --output report.html $F
+          ./rlgl e --id=${LABDROID_COMPLIANCE_ID} --policy https://github.com/atgreen/labdroid-ocp-policy report.html
+        done;
+        rm -rf $TDIR
