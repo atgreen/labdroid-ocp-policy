@@ -22,14 +22,20 @@
               volumeMounts:
               - mountPath: "/workers-scan-results"
                 name: workers-scan-vol
+              - mountPath: "/masters-scan-results"
+                name: masters-scan-vol
           volumes:
             - name: workers-scan-vol
               persistentVolumeClaim:
                 claimName: ocp4-cis-node-worker
+            - name: masters-scan-vol
+              persistentVolumeClaim:
+                claimName: ocp4-cis-node-master
         EOF
         sleep 5
         TDIR=$(mktemp -d)
         oc cp pv-extract:/workers-scan-results/$(oc rsh pv-extract sh -c "ls -1rt workers-scan-results" | tail -n 1 | tr -d "\r" ) $TDIR
+        oc cp pv-extract:/masters-scan-results/$(oc rsh pv-extract sh -c "ls -1rt masters-scan-results" | tail -n 1 | tr -d "\r" ) $TDIR
         oc delete pod pv-extract
         bzip2 -d $TDIR/*
         wget -qO - https://rl.gl/cli/rlgl-linux-amd64.tgz | \
